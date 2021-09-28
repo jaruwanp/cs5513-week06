@@ -2,7 +2,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Layout from '../../components/layout';
 
-import { getResourceIds, getResourceData } from '../../lib/persons';
+import { getResourceIds, getResourceData} from '../../lib/persons';
 
 export async function getStaticProps({ params }) {
   const itemData = await getResourceData(params.id);
@@ -13,6 +13,7 @@ export async function getStaticProps({ params }) {
     }
   };
 }
+
 
 export async function getStaticPaths() {
   const paths = await getResourceIds();
@@ -88,15 +89,16 @@ export default function Entry({ itemData }) {
         }
         {
           itemData?
-          itemData.data.relatedid ? 
-          itemData.data.relatedid.map(
-            ({ id, name }) => (
-              <Link key={id} href={`/${id}`}>
-                <a className="list-group-item list-group-item-action">N/A</a>
-              </Link>
-            )
-          )
-
+          itemData.data.relatedid ?
+          itemData.data.relatedid 
+          //convertStringToJSON(itemData.data.relatedid).map(
+          //  ({ id, name }) => (
+          //    <Link key={id} href={`/${id}`}>
+          //      <a className="list-group-item list-group-item-action">N/A</a>
+          //    </Link>
+          //  )
+          //)
+         
           : null
           : null
         }
